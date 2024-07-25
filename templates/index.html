@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Clinic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Previous Questions</h2>
+        <ul>
+            {% for record in records %}
+                <li data-answer="{{ record[1] }}" onclick="showAnswer('{{ record[0] }}', '{{ record[1] }}')">{{ record[0] }}</li>
+            {% endfor %}
+        </ul>
+        <form method="POST" action="/fine-tune">
+            <input type="submit" value="Fine-Tune Model">
+        </form>
+    </div>
+    <div class="container">
+        <h1>AI Clinic</h1>
+        <form method="POST" action="/ask">
+            <textarea name="question" placeholder="Type your medical question here..."></textarea>
+            <input type="submit" value="Submit">
+        </form>
+        <div id="qa-block" class="answer">
+            <h2>Your Question:</h2>
+            <p id="displayed-question">{{ question }}</p>
+            <h2>Answer:</h2>
+            <p id="displayed-answer" class="ans">{{ answer }}</p>
+            <div id="rating-section" style="display:none;">
+                <h2>Rate this Answer:</h2>
+                <form method="POST" action="/rate">
+                    <select name="rating" id="rating">
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3" selected>3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                    <input type="hidden" name="question" id="hidden-question" value="">
+                    <input type="hidden" name="answer" id="hidden-answer" value="">
+                    <input type="submit" value="Submit Rating">
+                </form>
+            </div>
+        </div>
+        <!-- Hidden element to store question and answer -->
+        <div id="hidden-qa" style="display:none;"
+             data-question="{{ question | default('', true) }}"
+             data-answer="{{ answer | default('', true) }}"></div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
