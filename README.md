@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The AI Clinic project aims to answer medical questions based on user input. The system utilizes a fine-tuned T5 model to generate responses to medical queries, enabling users to receive accurate and contextually relevant answers. Additionally, the system allows for continuous improvement by fine-tuning the model with new user-provided data. The web application features a user-friendly interface where users can ask questions, view previous interactions, rate responses, and trigger model fine-tuning based on collected data. Users can rate each answer, and users can fine-tune the model with high-rate answers, so that each user can have their personalized model. 
+The AI Clinic project aims to answer medical questions based on user input. The system utilizes a fine-tuned T5 model to generate responses to medical queries, enabling users to receive accurate and contextually relevant answers. Additionally, the system allows for continuous improvement by fine-tuning the model with new user-provided data. Users can fine-tune the model with their own high-rate answers, so that each user can have their personalized model. 
 
 
 ## Technologies and Tools
@@ -21,11 +21,12 @@ The AI Clinic project aims to answer medical questions based on user input. The 
 ## User Menu
 
 1. **Home Page**
-   - Displays a list of previous questions and answers.
-   - Provides a sidebar with previous questions and a form to ask new questions.
+   - Provides a sidebar with previous questions
+   - A form to ask new questions.
+   - Display questions and answers.
    - Includes a button to trigger model fine-tuning with collected data.
 2. **Ask a Question**
-   - Users can type their medical question in the provided textarea and submit it.
+   - Users can type their medical question in the provided text area and submit it.
    - The system generates an answer using the fine-tuned T5 model and displays it on the same page.
    - Users can view the question and the generated answer immediately.
 3. **Rate the Answer**
@@ -35,4 +36,29 @@ The AI Clinic project aims to answer medical questions based on user input. The 
 4. **Fine-Tune the Model**
    - A button in the sidebar allows users to trigger the fine-tuning process.
    - The system retrieves high-rated records from the database, updates their status, and uses them to fine-tune the T5 model.
-   - Successful fine-tuning is acknowledged with a flash message.
+
+## Preparation of the Model
+See details at https://github.com/Yiheng-Gao/AI-Clinic-flan-t5-fine-tuning-process
+
+
+## File and Folder Descriptions
+
+- **datasets/**: Contains the CSV file `dataset.csv` used for model fine-tuning.
+- **fine-tuned-model/**: Contains the original fine-tuned model files.
+- **personized_model/**: Contains the models fine-tuned by user records, with subdirectories like `checkpoint-50` indicating different checkpoints.
+- **runs/**: Directory used for logging and storing training runs (e.g., TensorBoard logs).
+- **static/**: Contains static files like JavaScript and CSS.
+- **templates/**: Contains HTML templates for rendering web pages.
+  - **index.html**: Main HTML template for the web application.
+- **app.py**: Main backend logic including endpoints for the Flask application.
+  - Handles HTTP requests, processes user inputs, and serves web pages.
+  - Integrates with the machine learning model to generate answers and manage records.
+- **create_dataset.py**: Helps get records from the database and prepare the CSV file for fine-tuning the model.
+  - Fetches data from the database and writes it to `dataset.csv`.
+- **RecordDAL.py**: Data Access Layer for interacting with the MySQL database.
+  - Contains functions to get and save records and manage data.
+- **training.py**: Contains the fine-tuning method for the machine learning model.
+  - Defines the `fine_tuning` function to fine-tune the `flan-t5-small` model using the dataset.
+
+## Reference
+[FLAN-T5 Tutorial: Guide and Fine-Tuning](https://www.datacamp.com/tutorial/flan-t5-tutorial) - A complete guide to fine-tuning a FLAN-T5 model for a question-answering task using transformers library, and running optmized inference on a real-world scenario.
