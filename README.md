@@ -2,7 +2,8 @@
 
 ## Introduction
 
-The AI Clinic project aims to answer medical questions based on user input. The system utilizes a fine-tuned T5 model to generate responses to medical queries, enabling users to receive accurate and contextually relevant answers. Additionally, the system allows for continuous improvement by fine-tuning the model with new user-provided data. Users can fine-tune the model with their own high-rate answers, so that each user can have their personalized model. 
+The AI Clinic project aims to answer medical questions based on user input. The system utilizes a fine-tuned T5 model to generate responses to medical queries, enabling users to receive accurate and contextually relevant answers. Additionally, the system allows for continuous improvement by fine-tuning the model with new user-provided data. Users can fine-tune the model with their own high-rate answers, so that each user can have their personalized model. <br/>
+**Demo Video**: https://youtu.be/WCmDtncoVNE
 
 
 ## Technologies and Tools
