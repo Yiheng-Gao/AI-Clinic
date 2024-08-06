@@ -5,8 +5,8 @@ def save_case(question, answer, rate):
         # Establish the database connection
         mydb = mysql.connector.connect(
             host="localhost",
-            user="root",
-            password="123456",
+            user="",
+            password="",
             database="aidoctor"
         )
 
